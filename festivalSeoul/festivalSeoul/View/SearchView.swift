@@ -13,6 +13,11 @@ struct SearchView: View {
     /// 검색창 선택/선택해제 여부
     @State private var isEditing = false
     
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible()),
+    ]
+    
     var body: some View {
         VStack{
             /// Desc : 검색어 입력창
@@ -92,10 +97,20 @@ struct SearchView: View {
                     HStack{
                         ForEach(0..<SearchCollectionViewCell.column) { j in
                             SearchCollectionViewCell(row: i, column: j)
-                                
+                            
                         }
-                    }.padding(10)
+                    }
                 }
+            // ---------------- Lazy Grid 사용 고려중 ----------------
+                //                LazyVGrid(columns: columns) {
+                //                    ForEach(0..<SearchCollectionViewCell.row) { i in
+                //                        HStack{
+                //                            ForEach(0..<SearchCollectionViewCell.column, id: \.self) { j in
+                //                                SearchCollectionViewCell(row: i, column: j)
+                //                            }
+                //                        }.padding(1)
+                //                    }
+                //                }
             }
         }
     }

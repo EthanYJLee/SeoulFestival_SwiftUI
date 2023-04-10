@@ -33,6 +33,7 @@ extension Endpoint{
 extension Endpoint {
     static var worldwide: Self {
         Endpoint(
+            // Key값 + 형식 + 서비스명 + 요청 시작 위치 + 요청 종료 위치
             path: "667a4643456c796a33315273504f79/json/culturalEventInfo/1/20/"
             
         )
