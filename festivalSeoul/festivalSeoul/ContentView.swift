@@ -23,7 +23,7 @@ struct ContentView: View {
                       Text("지도")
                     }
                   
-                SearchView()
+                SearchView(text: .constant(""))
                     .tabItem {
                       Image(systemName: "3.square.fill")
                       Text("검색")
