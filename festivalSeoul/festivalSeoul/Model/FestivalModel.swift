@@ -33,7 +33,9 @@ struct CulturalEventInfo: Codable{ // 디코딩 가능한 상태로 변경
                     codename: "",
                     title: "",
                     date: "",
-                    guname: "")
+                    guname: "",
+                    image: ""
+                    )
                 ]
         )
     )
@@ -73,11 +75,14 @@ struct Row: Codable{
     var date:String
     /// 자치구
     var guname: String
+    /// 이미지
+    var image: String
     
     enum CodingKeys: String, CodingKey{
         case codename = "CODENAME"
         case title = "TITLE"
         case date = "DATE"
         case guname = "GUNAME"
+        case image = "MAIN_IMG"
     }
 }

@@ -23,6 +23,7 @@ struct SearchCollectionViewCell: View {
     
     @State var title = ""   // 제목
     @State var codename = ""    // 카테고리
+    @State var image = ""   // 이미지
     
     init(row: Int, column: Int) {
         // Collection View Cell에 index 주기
@@ -35,18 +36,23 @@ struct SearchCollectionViewCell: View {
                 .frame(width: width,height: width)
                 .foregroundColor(.gray)
             VStack(alignment: .center, spacing: 10){
+                AsyncImage(url: URL(string: image)) { img in
+                    img.resizable()
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(width: 50, height: 70)
                 Text("\(index):\(codename)").font(.title3)
                     .foregroundColor(.white)
                 Text("\(title)").font(.system(size: 16))
                     .foregroundColor(.white)
+                    .lineLimit(2)
                     
             }
             
         }
         .onTapGesture {
-            
-            print(index)
-            print(codename)
+            print(index,codename,title)
         }
         
         /// Desc : View Cell이 그려질 때 공연 정보를 불러옴
@@ -71,6 +77,8 @@ struct SearchCollectionViewCell: View {
                 // 공연, 행사 제목 업데이트
                 title = events[index].title
                 codename = events[index].codename
+                image = events[index].image
+                
             }
         }
         // Error
