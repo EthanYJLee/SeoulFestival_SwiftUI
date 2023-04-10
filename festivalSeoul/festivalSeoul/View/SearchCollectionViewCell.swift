@@ -25,6 +25,7 @@ struct SearchCollectionViewCell: View {
     @State var codename = ""    // 카테고리
     
     init(row: Int, column: Int) {
+        // Collection View Cell에 index 주기
         index = (row * 2) + column
     }
     
@@ -33,17 +34,19 @@ struct SearchCollectionViewCell: View {
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: width,height: width)
                 .foregroundColor(.gray)
-            VStack{
-                Text("\(index):\(codename)").font(.largeTitle)
+            VStack(alignment: .center, spacing: 10){
+                Text("\(index):\(codename)").font(.title3)
                     .foregroundColor(.white)
                 Text("\(title)").font(.system(size: 16))
                     .foregroundColor(.white)
-                    .padding(10)
+                    
             }
+            
         }
         .onTapGesture {
             
             print(index)
+            print(codename)
         }
         
         /// Desc : View Cell이 그려질 때 공연 정보를 불러옴

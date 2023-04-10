@@ -94,16 +94,11 @@ struct SearchView: View {
                             SearchCollectionViewCell(row: i, column: j)
                                 
                         }
-                    }
+                    }.padding(10)
                 }
             }
-            
         }
-        
     }
-    
-    
-    
 }
 
 struct SearchView_Previews: PreviewProvider {
@@ -111,62 +106,3 @@ struct SearchView_Previews: PreviewProvider {
         SearchView(text: .constant(""))
     }
 }
-
-///// SearchCollectionView
-//struct SearchCollectionView: UIViewRepresentable{
-////    @State var data = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]
-//    @Binding var festival: Array<String>
-//    @Binding var selection: Bool?
-//    @Binding var itemIndex: Int?
-//    func makeUIView(context: Context) -> UICollectionView {
-//        let collectionView = UICollectionView(frame:.zero, collectionViewLayout: UICollectionViewFlowLayout())
-//
-//        collectionView.backgroundColor = .gray
-//        collectionView.dataSource = context.coordinator
-//        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "Cell")
-//
-//        return collectionView
-//    }
-//
-//
-//    func updateUIView(_ uiView: UICollectionView, context: Context) {
-//
-//    }
-//
-//    func makeCoordinator() -> Coordinator {
-//        Coordinator(self)
-//    }
-//}
-//
-///// Desc : DataSource, Delegate 구현
-///// Date : 2023.04.05
-///// Author : youngjin
-//class Coordinator: NSObject, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-//    private let parent: SearchCollectionView
-//
-//    init(_ collectionView: SearchCollectionView) {
-//        self.parent = collectionView
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        self.parent.festival.count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Cell", for: indexPath)
-//        cell.backgroundColor = .lightGray
-//        cell.sizeToFit()
-//        return cell
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-//
-//        return CGSize(width: 100, height: 100)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        parent.itemIndex = indexPath.item
-//        parent.selection = true
-//    }
-//
-//}
