@@ -21,9 +21,12 @@ struct SearchCollectionViewCell: View {
     /// Author : youngjin
     @State private var events = [Row]()
     
-    @State var title = ""   // 제목
     @State var codename = ""    // 카테고리
+    @State var title = ""   // 제목
+    @State var date = ""    // 날짜
+    @State var guname = ""  // 자치구
     @State var image = ""   // 이미지
+    @State var link = ""   // 링크
     
     init(row: Int, column: Int) {
         // Collection View Cell에 index 주기
@@ -31,36 +34,31 @@ struct SearchCollectionViewCell: View {
     }
     
     var body: some View {
+        
         ZStack{
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: width,height: width)
                 .foregroundColor(.gray)
-            VStack(alignment: .center, spacing: 10){
-                AsyncImage(url: URL(string: image)) { img in
-                    img.resizable()
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(width: 50, height: 70)
-                .padding(10)
-                Text("\(index):\(codename)").font(.title3)
-                    .foregroundColor(.white)
-                Text("\(title)").font(.system(size: 16))
-                    .foregroundColor(.white)
-                    .lineLimit(2)
-//                    .padding(10)
-                    
-                    
-            }
-            .frame(width: width,height: width)
-            .padding(5)
             
+            NavigationLink(destination: SearchDetailView(codename: codename, title: title, date: date, guname: guname, image: image, link: link)){
+                VStack(alignment: .center, spacing: 10){
+                    AsyncImage(url: URL(string: image)) { img in
+                        img.resizable()
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(width: 50, height: 70)
+                    .padding(10)
+                    Text("\(index):\(codename)").font(.title3)
+                        .foregroundColor(.white)
+                    Text("\(title)").font(.system(size: 16))
+                        .foregroundColor(.white)
+                        .lineLimit(2)
+                }
+                .frame(width: width,height: width)
+                .padding(5)
+            }
         }
-        
-        .onTapGesture {
-            print(index,codename,title)
-        }
-        
         /// Desc : View Cell이 그려질 때 공연 정보를 불러옴
         /// Date : 2023.04.06
         /// Author : youngjin
@@ -73,7 +71,6 @@ struct SearchCollectionViewCell: View {
         // Create URL
         let endpoint = Endpoint.worldwide
         let networkManager = NetworkManager()
-        
         // Fetch Data
         do {
             let data = try await networkManager.download(from: .worldwide)
@@ -83,8 +80,10 @@ struct SearchCollectionViewCell: View {
                 // 공연, 행사 제목 업데이트
                 title = events[index].title
                 codename = events[index].codename
+                date = events[index].date
+                guname = events[index].guname
                 image = events[index].image
-                
+                link = events[index].link
             }
         }
         // Error

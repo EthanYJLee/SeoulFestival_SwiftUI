@@ -34,7 +34,8 @@ struct CulturalEventInfo: Codable{ // 디코딩 가능한 상태로 변경
                     title: "",
                     date: "",
                     guname: "",
-                    image: ""
+                    image: "",
+                    link: ""
                     )
                 ]
         )
@@ -77,6 +78,8 @@ struct Row: Codable{
     var guname: String
     /// 이미지
     var image: String
+    /// 링크
+    var link: String
     
     enum CodingKeys: String, CodingKey{
         case codename = "CODENAME"
@@ -84,5 +87,13 @@ struct Row: Codable{
         case date = "DATE"
         case guname = "GUNAME"
         case image = "MAIN_IMG"
+        case link = "ORG_LINK"
     }
+    
+    /// Desc : 초기화에 사용되는 sample data
+    /// Date : 2023.04.07
+    /// Author : youngjin
+    static let sampleRow = Row(
+        codename: "", title: "", date: "", guname: "", image: "", link: ""
+    )
 }
