@@ -6,6 +6,7 @@
 //
 
 import Foundation
+
 // URL 설정
 struct Endpoint{
     let path: String
@@ -28,12 +29,3 @@ extension Endpoint{
         return url
     }
 }
-
-//extension Endpoint {
-//    static var worldwide: Self {
-//        Endpoint(
-//            // 키 (KEY) + 형식 (TYPE) + 서비스명 (SERVICE) + 요청 시작 위치 (START_INDEX) + 요청 종료 위치 (END_INDEX)
-//            path: "667a4643456c796a33315273504f79/json/culturalEventInfo/1/20/"
-//        )
-//    }
-//}

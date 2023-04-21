@@ -72,13 +72,10 @@ struct SearchCollectionViewCell: View {
         
         // 1. Create URL
         let endpoint = Endpoint(path: "667a4643456c796a33315273504f79/json/culturalEventInfo/1/20/", category: self.category)
-        print(endpoint)
-        
         let networkManager = NetworkManager()
         
         // 2. Fetch Data
         do {
-            
             let data = try await networkManager.download(from: endpoint)
             
             // 3. Decode Data
@@ -93,6 +90,7 @@ struct SearchCollectionViewCell: View {
                 link = events[index].link
             }
         }
+        
         // 4. Error
         catch let DecodingError.dataCorrupted(context) {
             print(context)

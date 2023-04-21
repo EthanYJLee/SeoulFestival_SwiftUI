@@ -9,11 +9,13 @@ import SwiftUI
 
 struct SearchView: View {
     
+    /// ------------Text Field 관련------------
     /// 검색창에 입력되는 텍스트
     @State var text: String = ""
     /// 검색창 Focus / Focus 해제 여부
     @State private var isEditing = false
     
+    /// ------------카테고리 관련------------
     /// 카테고리 메뉴
     let categoryMenus: [String] = ["전체","클래식", "콘서트", "연극", "국악", "뮤지컬/오페라", "축제-문화/예술", "무용", "교육/체험"]
     /// 카테고리 초기값
@@ -22,7 +24,7 @@ struct SearchView: View {
     @State var isExpanded = false
     
     var body: some View {
-        /// Desc : Collection View Cell ( SearchCollectionViewCell) 탭하면 해당 공연 Detail View (SearchDetailView)로 이동
+        /// Desc : Collection View Cell (SearchCollectionViewCell) 탭하면 해당 공연 Detail View (SearchDetailView)로 이동
         /// Date : 2023.04.11
         /// Author : youngjin
         NavigationView{
@@ -118,15 +120,10 @@ struct SearchView: View {
                 .refreshable {
                     print("refresh")
                 }
-                
-                NavigationLink(destination: FestivalView()){
-                    Text("view model")
-                }
             }
         }
     }
 }
-
 
 struct SearchView_Previews: PreviewProvider {
     static var previews: some View {
