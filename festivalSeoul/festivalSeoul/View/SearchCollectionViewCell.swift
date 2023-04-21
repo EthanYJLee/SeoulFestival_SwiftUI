@@ -13,6 +13,7 @@ struct SearchCollectionViewCell: View {
     /// Author : youngjin
     static let column = 2
     static let row = 5
+    var category = ""   // filtering할 특정 카테고리
     let width = (UIScreen.main.bounds.width/2)-20
     var index = 0
     
@@ -20,7 +21,6 @@ struct SearchCollectionViewCell: View {
     /// Date : 2023.04.10
     /// Author : youngjin
     @State private var events = [Row]()
-    
     @State var codename = ""    // 카테고리
     @State var title = ""   // 제목
     @State var date = ""    // 날짜
@@ -28,13 +28,13 @@ struct SearchCollectionViewCell: View {
     @State var image = ""   // 이미지
     @State var link = ""   // 링크
     
-    init(row: Int, column: Int) {
+    init(row: Int, column: Int, category: String) {
         // Collection View Cell에 index 주기
         index = (row * 2) + column
+        self.category = category
     }
     
     var body: some View {
-        
         ZStack{
             RoundedRectangle(cornerRadius: 10)
                 .frame(width: width,height: width)
@@ -59,6 +59,7 @@ struct SearchCollectionViewCell: View {
                 .padding(5)
             }
         }
+        
         /// Desc : View Cell이 그려질 때 공연 정보를 불러옴
         /// Date : 2023.04.06
         /// Author : youngjin
@@ -66,15 +67,21 @@ struct SearchCollectionViewCell: View {
             await fetchData()
         }
     }
-    
+        
     func fetchData() async{
-        // Create URL
-        let endpoint = Endpoint.worldwide
+        
+        // 1. Create URL
+        let endpoint = Endpoint(path: "667a4643456c796a33315273504f79/json/culturalEventInfo/1/20/", category: self.category)
+        print(endpoint)
+        
         let networkManager = NetworkManager()
-        // Fetch Data
+        
+        // 2. Fetch Data
         do {
-            let data = try await networkManager.download(from: .worldwide)
-            // Decode Data
+            
+            let data = try await networkManager.download(from: endpoint)
+            
+            // 3. Decode Data
             if let result = try? JSONDecoder().decode(CulturalEventInfo.self, from: data){
                 events = result.culturalEventInfo.row
                 // 공연, 행사 제목 업데이트
@@ -86,7 +93,7 @@ struct SearchCollectionViewCell: View {
                 link = events[index].link
             }
         }
-        // Error
+        // 4. Error
         catch let DecodingError.dataCorrupted(context) {
             print(context)
         } catch let DecodingError.keyNotFound(key, context) {
@@ -106,6 +113,7 @@ struct SearchCollectionViewCell: View {
 
 struct SearchCollectionViewCell_Previews: PreviewProvider {
     static var previews: some View {
-        SearchCollectionViewCell(row: 0, column: 1)
+        SearchCollectionViewCell(row: 0, column: 1, category: "")
     }
 }
+

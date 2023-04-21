@@ -8,7 +8,14 @@
 import SwiftUI
 
 struct SearchDetailView: View{
+    /// Desc : 상세보기 버튼 클릭 시 정보 Card View 나오게
+    /// Date : 2023.04.15
+    /// Author : youngjin
     @State private var isBtnTapped = false
+    /// Desc : 북마크 여부
+    /// Date : 2023.04.15
+    /// Author : youngjin
+    @State private var isBookmarked = false
     @GestureState private var dragOffset: CGFloat = 0
     
     var codename: String
@@ -26,16 +33,22 @@ struct SearchDetailView: View{
         
         ZStack{
             if !self.isBtnTapped{
-                VStack(alignment: .leading){
-                    Text("공연 정보")
-                        .font(.system(.largeTitle, design: .rounded))
-                        .fontWeight(.black)
-                    Text(title)
-                        .font(.title2)
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
-                
-                .padding(.leading, 20)
+                    VStack(alignment: .leading){
+                        HStack {
+                            Text("공연 정보")
+                                .font(.system(.largeTitle, design: .rounded))
+                            .fontWeight(.black)
+                            if self.isBookmarked{
+                                Image(systemName: "bookmark.fill")
+                                    .font(.system(size: 25))
+                                    .offset(x:-15,y: -5)
+                            }
+                        }
+                        Text(title)
+                            .font(.title2)
+                    }
+                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .topLeading)
+                    .padding(.leading, 20)
             }
             VStack{
                 AsyncImage(url: URL(string: image)) { img in
@@ -81,7 +94,7 @@ struct SearchDetailView: View{
         .background(Color("lightGray"))
         
     }
-        
+    
 }
 
 struct SearchDetailView_Previews: PreviewProvider {

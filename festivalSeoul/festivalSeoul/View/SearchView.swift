@@ -8,10 +8,18 @@
 import SwiftUI
 
 struct SearchView: View {
+    
     /// 검색창에 입력되는 텍스트
     @State var text: String = ""
     /// 검색창 Focus / Focus 해제 여부
     @State private var isEditing = false
+    
+    /// 카테고리 메뉴
+    let categoryMenus: [String] = ["전체","클래식", "콘서트", "연극", "국악", "뮤지컬/오페라", "축제-문화/예술", "무용", "교육/체험"]
+    /// 카테고리 초기값
+    @State private var selectedCategory: String = "카테고리"
+    /// 카테고리 목록 show / hide
+    @State var isExpanded = false
     
     var body: some View {
         /// Desc : Collection View Cell ( SearchCollectionViewCell) 탭하면 해당 공연 Detail View (SearchDetailView)로 이동
@@ -67,20 +75,22 @@ struct SearchView: View {
                 /// Date : 2023.04.05
                 /// Author : youngjin
                 HStack{
-                    Button(action: {
-                        print("Button1 Tapped")
-                    }){
-                        Text("전체")
-                    }
-                    Button(action: {
-                        print("Button2 Tapped")
-                    }){
-                        Text("category2")
-                    }
-                    Button(action: {
-                        print("Button3 Tapped")
-                    }){
-                        Text("category3")
+                    GroupBox {
+                        DisclosureGroup(
+                            "\(selectedCategory)",
+                            isExpanded: $isExpanded) {
+                                ForEach(0..<categoryMenus.count){index in
+                                    Text(categoryMenus[index])
+                                        .onTapGesture {
+                                            // 카테고리 선택
+                                            selectedCategory = categoryMenus[index]
+                                            print(selectedCategory)
+                                            // 카테고리 선택하면 dropdown menu 접힘
+                                            isExpanded.toggle()
+                                        }
+                                    Divider()
+                                }
+                            }
                     }
                 }
                 .padding(10)
@@ -92,11 +102,25 @@ struct SearchView: View {
                     ForEach(0..<SearchCollectionViewCell.row) { i in
                         HStack{
                             ForEach(0..<SearchCollectionViewCell.column) { j in
-                                SearchCollectionViewCell(row: i, column: j)
+                                if selectedCategory == "카테고리" || selectedCategory == "전체" {
+                                    SearchCollectionViewCell(row: i, column: j, category: "")
+                                }else{
+                                    /// Desc : 카테고리를 선택 (변경)했을 경우 ScrollView를 재호출하기 위해 view의 identity를 갱신해준다.
+                                    /// Date : 2023.04.22
+                                    /// Author : youngjin
+                                    SearchCollectionViewCell(row: i, column: j, category: selectedCategory).id(UUID())
+                                }
                             }
                         }
-                        
                     }
+                }
+                // Scroll 아래로 당겨서 새로고침
+                .refreshable {
+                    print("refresh")
+                }
+                
+                NavigationLink(destination: FestivalView()){
+                    Text("view model")
                 }
             }
         }

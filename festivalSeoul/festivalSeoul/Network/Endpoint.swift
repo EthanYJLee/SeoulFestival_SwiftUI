@@ -9,7 +9,7 @@ import Foundation
 // URL 설정
 struct Endpoint{
     let path: String
-    var queries: [URLQueryItem] = []
+    var category: String = ""
 }
 
 extension Endpoint{
@@ -20,22 +20,20 @@ extension Endpoint{
         components.scheme = "http"
         components.host = "openapi.seoul.go.kr"
         components.port = 8088
-        components.path = "/" + path
-        
+        components.path = "/" + path + category
         
         guard let url = components.url else {
             preconditionFailure("Invalid URL components: \(components)")
         }
-        
         return url
     }
 }
-extension Endpoint {
-    static var worldwide: Self {
-        Endpoint(
-            // Key값 + 형식 + 서비스명 + 요청 시작 위치 + 요청 종료 위치
-            path: "667a4643456c796a33315273504f79/json/culturalEventInfo/1/20/"
-            
-        )
-    }
-}
+
+//extension Endpoint {
+//    static var worldwide: Self {
+//        Endpoint(
+//            // 키 (KEY) + 형식 (TYPE) + 서비스명 (SERVICE) + 요청 시작 위치 (START_INDEX) + 요청 종료 위치 (END_INDEX)
+//            path: "667a4643456c796a33315273504f79/json/culturalEventInfo/1/20/"
+//        )
+//    }
+//}
