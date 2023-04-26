@@ -71,6 +71,7 @@
 		4E23B92329DB07EB00D51908 /* festivalSeoul */ = {
 			isa = PBXGroup;
 			children = (
+				AAC1C01029F91F0E00878839 /* Utils */,
 				AADEBE8F29F2B410004E22A9 /* ViewModel */,
 				AABA65F029DEBA8D004D21A6 /* Model */,
 				AABA65ED29DD90AA004D21A6 /* Network */,
@@ -119,6 +120,13 @@
 				AABA65E929DD88D1004D21A6 /* FestivalModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		AAC1C01029F91F0E00878839 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		AADEBE8F29F2B410004E22A9 /* ViewModel */ = {

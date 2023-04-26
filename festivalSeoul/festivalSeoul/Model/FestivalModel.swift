@@ -34,6 +34,7 @@ struct CulturalEventInfo: Codable{ // 디코딩 가능한 상태로 변경
                     title: "",
                     date: "",
                     guname: "",
+                    place: "",
                     image: "",
                     link: ""
                     )
@@ -76,6 +77,8 @@ struct Row: Codable{
     var date:String
     /// 자치구
     var guname: String
+    /// 장소
+    var place: String
     /// 이미지
     var image: String
     /// 링크
@@ -86,6 +89,7 @@ struct Row: Codable{
         case title = "TITLE"
         case date = "DATE"
         case guname = "GUNAME"
+        case place = "PLACE"
         case image = "MAIN_IMG"
         case link = "ORG_LINK"
     }
@@ -94,6 +98,6 @@ struct Row: Codable{
     /// Date : 2023.04.07
     /// Author : youngjin
     static let sampleRow = Row(
-        codename: "", title: "", date: "", guname: "", image: "", link: ""
+        codename: "", title: "", date: "", guname: "", place: "", image: "", link: ""
     )
 }

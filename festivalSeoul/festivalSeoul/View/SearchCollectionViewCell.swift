@@ -25,6 +25,7 @@ struct SearchCollectionViewCell: View {
     @State var title = ""   // 제목
     @State var date = ""    // 날짜
     @State var guname = ""  // 자치구
+    @State var place = ""   // 장소
     @State var image = ""   // 이미지
     @State var link = ""   // 링크
     
@@ -40,7 +41,7 @@ struct SearchCollectionViewCell: View {
                 .frame(width: width,height: width)
                 .foregroundColor(.gray)
             
-            NavigationLink(destination: SearchDetailView(codename: codename, title: title, date: date, guname: guname, image: image, link: link)){
+            NavigationLink(destination: SearchDetailView(codename: codename, title: title, date: date, guname: guname, place: place, image: image, link: link)){
                 VStack(alignment: .center, spacing: 10){
                     AsyncImage(url: URL(string: image)) { img in
                         img.resizable()
@@ -86,6 +87,7 @@ struct SearchCollectionViewCell: View {
                 codename = events[index].codename
                 date = events[index].date
                 guname = events[index].guname
+                place = events[index].place
                 image = events[index].image
                 link = events[index].link
             }

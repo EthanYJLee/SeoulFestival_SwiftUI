@@ -6,9 +6,10 @@
 //
 
 import SwiftUI
+import EventKit
 
 struct SearchDetailView: View{
-    /// Desc : 상세보기 버튼 클릭 시 정보 Card View 나오게
+    /// Desc : 상세보기 버튼 클릭 시 정보 Modal View 나오게
     /// Date : 2023.04.15
     /// Author : youngjin
     @State private var isBtnTapped = false
@@ -22,15 +23,14 @@ struct SearchDetailView: View{
     var title: String
     var date: String
     var guname: String
+    var place: String
     var image: String
     var link: String
     
     let width = UIScreen.main.bounds.width
     let height = UIScreen.main.bounds.height
     
-    
     var body: some View{
-        
         ZStack{
             if !self.isBtnTapped{
                     VStack(alignment: .leading){
@@ -57,7 +57,7 @@ struct SearchDetailView: View{
                     ProgressView()
                 }
                 .clipShape(RoundedRectangle(cornerRadius: 30))
-                .frame(width: self.isBtnTapped ? width:width/1.5, height: self.isBtnTapped ? height/1.5:height/2)
+                .frame(width: width/1.4, height: height/2)
                 .padding(.horizontal, self.isBtnTapped ? 0 : 20)
                 
                 Button(action: {
@@ -74,24 +74,30 @@ struct SearchDetailView: View{
                 }
             }
             if self.isBtnTapped{
-                InfoView(codename: codename, title: title, date: date, guname: guname, image: image, link: link)
-                    .offset(y: 200)
-                    .offset(x: self.dragOffset)
-                    .transition(.move(edge: .bottom))
+                
+                VStack {
+                    Button(action: {
+                        self.isBtnTapped = false
+                        
+                    }){
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 30))
+                            .foregroundColor(.black)
+                            .opacity(0.7)
+                            .contentShape(Rectangle())
+                    }
+                    InfoView(codename: codename, title: title, date: date, guname: guname, place: place, image: image, link: link)
+                        .offset(y: 50)
+                        .offset(x: self.dragOffset)
+                        .transition(.move(edge: .bottom))
                     .animation(.interpolatingSpring(mass:0.5, stiffness: 100, damping: 10, initialVelocity:0.3))
-                Button(action: {
-                    self.isBtnTapped = false
-                    
-                }){
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.system(size: 30))
-                        .foregroundColor(.black)
-                        .opacity(0.7)
-                        .contentShape(Rectangle())
                 }
+                
+                
             }
         }
-        .background(Color("lightGray"))
+//        .background(Color("lightGray"))
+        .background(Color(white: 0.9))
         
     }
     
@@ -99,7 +105,7 @@ struct SearchDetailView: View{
 
 struct SearchDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        SearchDetailView(codename: "", title: "", date: "", guname: "", image: "", link: "")
+        SearchDetailView(codename: "", title: "", date: "", guname: "", place: "", image: "", link: "")
     }
 }
 
@@ -108,27 +114,56 @@ struct InfoView: View{
     var title: String
     var date: String
     var guname: String
+    var place: String
     var image: String
     var link: String
+    
+    let width = UIScreen.main.bounds.width
+    let height = UIScreen.main.bounds.height
+    
+    @State private var showingAlert = false
     
     var body: some View{
         ScrollView{
             ZStack{
-                VStack(alignment: .leading, spacing: 5){
-                    VStack(alignment: .leading, spacing: 5){
-                        Text("\(self.title) (\(self.guname))")
-                            .font(.title)
+
+                    VStack(alignment: .center, spacing: 1){
+                        HStack {
+                            AsyncImage(url: URL(string: image)) { img in
+                                img.resizable()
+                            } placeholder: {
+                                ProgressView()
+                            }
+                            .frame(width: width/1.7,height: height/2.3)
+                        .clipShape(RoundedRectangle(cornerRadius: 30))
+                        }
+                        Spacer()
+                        Text("공연/행사명: \(self.title)")
+                            .lineLimit(nil)
+                        Text("장소: \(self.guname) - \(self.place)")
+                            .lineLimit(nil)
                         Text(self.date)
-                            .font(.headline)
+                            .onTapGesture {
+                                print("tapped")
+                            }
+                        Button(action: {
+                                    self.showingAlert = true
+                                }) {
+                                    Text(self.date)
+                                }
+                                .alert(isPresented: $showingAlert) {
+                                    Alert(title: Text("Title"), message: Text("This is a alert message"), dismissButton: .default(Text("Dismiss")))
+                                }
+
                         
-                        Link("예매하기", destination: URL(string: link)!)
+                        Link("홈페이지", destination: URL(string: link)!)
                             .font(.title3)
+                        Spacer()
                     }
-                    
-                }
-                .frame(width: UIScreen.main.bounds.width,height: UIScreen.main.bounds.height/1.8)
-                .background(Color("lightGray"))
+                .frame(width: UIScreen.main.bounds.width,height: UIScreen.main.bounds.height/1.5)
+                .background(Color(white: 0.9))
             }
         }
     }
 }
+
