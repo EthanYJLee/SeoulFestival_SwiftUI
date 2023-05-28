@@ -9,34 +9,51 @@ import SwiftUI
 
 // tab bar view 
 struct ContentView: View {
+    @State var isLoading: Bool = true
     var body: some View {
-        VStack {
-            TabView {
-                  MainView()
-                    .tabItem {
-                      Image(systemName: "1.square.fill")
-                      Text("홈페이지")
-                    }
-                 MapView()
-                    .tabItem {
-                      Image(systemName: "2.square.fill")
-                      Text("지도")
-                    }
-                  
-                SearchView()
-                    .tabItem {
-                      Image(systemName: "3.square.fill")
-                      Text("검색")
-                    }
-                
-                CalendarView()
-                    .tabItem {
-                      Image(systemName: "4.square.fill")
-                      Text("달력")
-                    }
+        ZStack {
+            VStack {
+                TabView {
+                    MainView()
+                        .tabItem {
+                            Image(systemName: "house")
+                            Text("홈")
+                        }
+                    MapView()
+                        .tabItem {
+                            Image(systemName: "map")
+                            Text("지도")
+                        }
+                    
+                    SearchView()
+                        .tabItem {
+                            Image(systemName: "magnifyingglass")
+                            Text("검색")
+                        }
+                    
+                    CalendarView()
+                        .tabItem {
+                            Image(systemName: "calendar")
+                            Text("달력")
+                        }
                 }
-        }
+            }
+            .zIndex(0)
+            // 로딩중이면 Circular Indicator 보여주기
+            if isLoading{
+                ProgressCircle().transition(.opacity).zIndex(1)
+            }
             
+        }
+        .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                
+                withAnimation{
+                    isLoading.toggle()
+                }
+            })
+        }
+        
     }
 }
 

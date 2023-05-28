@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct SearchView: View {
-    
+    @State var isLoading: Bool = true
     /// ------------Text Field 관련------------
     /// 검색창에 입력되는 텍스트
     @State var text: String = ""
@@ -96,14 +96,13 @@ struct SearchView: View {
                     }
                 }
                 .padding(10)
-                
                 /// Desc : Collection View Cell 생성
                 /// Date : 2023.04.10
                 /// Author : youngjin
                 ScrollView(.vertical,showsIndicators: false){
-                    ForEach(0..<SearchCollectionViewCell.row) { i in
+                    ForEach(0 ..< SearchCollectionViewCell.row) { i in
                         HStack{
-                            ForEach(0..<SearchCollectionViewCell.column) { j in
+                            ForEach(0 ..< SearchCollectionViewCell.column) { j in
                                 if selectedCategory == "카테고리" || selectedCategory == "전체" {
                                     SearchCollectionViewCell(row: i, column: j, category: "")
                                 }else{
@@ -115,6 +114,7 @@ struct SearchView: View {
                             }
                         }
                     }
+                    
                 }
                 // Scroll 아래로 당겨서 새로고침
                 .refreshable {

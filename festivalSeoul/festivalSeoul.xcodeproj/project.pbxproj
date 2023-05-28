@@ -14,6 +14,7 @@
 		4E23B93629DB150600D51908 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E23B93529DB150600D51908 /* MapView.swift */; };
 		4E23B93829DB151B00D51908 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E23B93729DB151B00D51908 /* SearchView.swift */; };
 		4E23B93A29DB152600D51908 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E23B93929DB152600D51908 /* CalendarView.swift */; };
+		AA5B2AF32A2369B300E73B3A /* ProgressCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA5B2AF22A2369B300E73B3A /* ProgressCircle.swift */; };
 		AABA65E629DD499B004D21A6 /* SearchDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA65E529DD499B004D21A6 /* SearchDetailView.swift */; };
 		AABA65EA29DD88D1004D21A6 /* FestivalModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA65E929DD88D1004D21A6 /* FestivalModel.swift */; };
 		AABA65EC29DD8BB2004D21A6 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABA65EB29DD8BB2004D21A6 /* Endpoint.swift */; };
@@ -32,6 +33,7 @@
 		4E23B93529DB150600D51908 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		4E23B93729DB151B00D51908 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		4E23B93929DB152600D51908 /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		AA5B2AF22A2369B300E73B3A /* ProgressCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressCircle.swift; sourceTree = "<group>"; };
 		AABA65E529DD499B004D21A6 /* SearchDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDetailView.swift; sourceTree = "<group>"; };
 		AABA65E929DD88D1004D21A6 /* FestivalModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FestivalModel.swift; sourceTree = "<group>"; };
 		AABA65EB29DD8BB2004D21A6 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
@@ -71,7 +73,7 @@
 		4E23B92329DB07EB00D51908 /* festivalSeoul */ = {
 			isa = PBXGroup;
 			children = (
-				AAC1C01029F91F0E00878839 /* Utils */,
+				AA5B2AF12A2369A500E73B3A /* Util */,
 				AADEBE8F29F2B410004E22A9 /* ViewModel */,
 				AABA65F029DEBA8D004D21A6 /* Model */,
 				AABA65ED29DD90AA004D21A6 /* Network */,
@@ -105,6 +107,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		AA5B2AF12A2369A500E73B3A /* Util */ = {
+			isa = PBXGroup;
+			children = (
+				AA5B2AF22A2369B300E73B3A /* ProgressCircle.swift */,
+			);
+			path = Util;
+			sourceTree = "<group>";
+		};
 		AABA65ED29DD90AA004D21A6 /* Network */ = {
 			isa = PBXGroup;
 			children = (
@@ -120,13 +130,6 @@
 				AABA65E929DD88D1004D21A6 /* FestivalModel.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		AAC1C01029F91F0E00878839 /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		AADEBE8F29F2B410004E22A9 /* ViewModel */ = {
@@ -219,6 +222,7 @@
 				4E23B93429DB14F900D51908 /* MainView.swift in Sources */,
 				4E23B92529DB07EB00D51908 /* festivalSeoulApp.swift in Sources */,
 				AABA65EA29DD88D1004D21A6 /* FestivalModel.swift in Sources */,
+				AA5B2AF32A2369B300E73B3A /* ProgressCircle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

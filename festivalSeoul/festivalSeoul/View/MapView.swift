@@ -62,15 +62,16 @@ struct Map: UIViewRepresentable {
     }
     
     func updateUIView(_ view: MKMapView, context: Context) {
-        let coordinate = CLLocationCoordinate2D(latitude: 37.33182, longitude: -122.03118)
+        
+        let coordinate = CLLocationCoordinate2D(latitude: 37.5519, longitude: 126.9918)
         let span = MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
         let region = MKCoordinateRegion(center: coordinate, span: span)
         view.setRegion(region, animated: true)
         
         let annotation = MKPointAnnotation()
         annotation.coordinate = coordinate
-        annotation.title = "Apple Park"
-        annotation.subtitle = "Cupertino, CA"
+        annotation.title = "서울시"
+//        annotation.subtitle = "Cupertino, CA"
         view.addAnnotation(annotation)
     }
 }

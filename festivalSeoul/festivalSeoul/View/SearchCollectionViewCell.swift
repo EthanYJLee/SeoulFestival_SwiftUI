@@ -50,8 +50,8 @@ struct SearchCollectionViewCell: View {
                     }
                     .frame(width: 50, height: 70)
                     .padding(10)
-                    Text("\(index):\(codename)").font(.title3)
-                        .foregroundColor(.white)
+//                    Text("\(index):\(codename)").font(.title3)
+//                        .foregroundColor(.white)
                     Text("\(title)").font(.system(size: 16))
                         .foregroundColor(.white)
                         .lineLimit(2)
@@ -67,6 +67,7 @@ struct SearchCollectionViewCell: View {
         .task {
             await fetchData()
         }
+        
     }
         
     func fetchData() async{
